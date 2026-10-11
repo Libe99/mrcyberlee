@@ -244,6 +244,7 @@ func acceptStreams(conn *kcp.UDPSession, privkey []byte, upstream string) error 
 
 	// Put an smux session on top of the encrypted Noise channel.
 	smuxConfig := smux.DefaultConfig()
+smuxConfig.MaxStreamBuffer = 4 * 1024 * 1024
 	smuxConfig.Version = 2
 	smuxConfig.KeepAliveTimeout = idleTimeout
 	smuxConfig.MaxStreamBuffer = 1 * 1024 * 1024 // default is 65536
